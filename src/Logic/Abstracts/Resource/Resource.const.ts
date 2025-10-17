@@ -3,7 +3,7 @@ import { ResourceDefs, ResourceType } from "./Resource.types";
 export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
     credit: {
         rarity: "common",
-        uses: ["assembly", "trade"],
+        uses: ["trade"],
         value: 1,
     },
     gas: {
@@ -67,3 +67,4 @@ export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
         value: 2000,
     },
 };
+

@@ -3,7 +3,10 @@ import { createStore } from "solid-js/store";
 
 import { CAR_COMPONENT_TYPES, CarComponentType } from "../Logic/Abstracts/Car/Component/CarComponent.types";
 import { CarComponentUtils } from "../Logic/Abstracts/Car/Component/CarComponent.utils";
+import { RESOURCE_DEFS } from "../Logic/Abstracts/Resource/Resource.const";
+import { ResourceType } from "../Logic/Abstracts/Resource/Resource.types";
 import { formatDuration, formatLargeNumber } from "../Logic/Utils/format";
+import { RarityLabel } from "./Fundamentals/RarityLabel/RarityLabel";
 import { Surface } from "./Fundamentals/Surface/Surface";
 import { Title } from "./Fundamentals/Title/Title";
 
@@ -34,22 +37,26 @@ export const App = () => {
                 <div class="flex" style={{ "justify-content": "center" }}>
                     <For each={Object.keys(levels)}>
                         {(key) => {
-                            const isDisabled = !CarComponentUtils.isUpgradeable(key as CarComponentType, levels);
+                            const getIsDisabled = createMemo(
+                                () => !CarComponentUtils.isUpgradeable(key as CarComponentType, levels),
+                            );
 
                             return (
-                                <label aria-disabled={isDisabled}>
-                                    <span style={{ opacity: isDisabled ? "0.5" : "1" }}>{key.toLocaleUpperCase()}</span>
+                                <label aria-disabled={getIsDisabled()}>
+                                    <span style={{ opacity: getIsDisabled() ? "0.5" : "1" }}>
+                                        {key.toLocaleUpperCase()}
+                                    </span>
                                     <input
                                         type="number"
                                         min={1}
-                                        max={50}
+                                        max={40}
                                         step={1}
                                         value={levels[key as CarComponentType]}
-                                        disabled={isDisabled}
+                                        disabled={getIsDisabled()}
                                         onChange={(e) => {
                                             setLevels(
                                                 key as CarComponentType,
-                                                Math.min(Math.max(Number(e.target.value), 1), 50),
+                                                Math.min(Math.max(Number(e.target.value), 1), 40),
                                             );
                                         }}
                                     />
@@ -97,13 +104,15 @@ export const App = () => {
                                 <For each={value.items}>
                                     {(item) => (
                                         <>
-                                            <div>{`${item.resource} * ${formatLargeNumber(item.amount)}`}</div>
+                                            <RarityLabel
+                                                rarity={() => RESOURCE_DEFS[item.resource].rarity}
+                                            >{`${item.resource} * ${formatLargeNumber(item.amount)}`}</RarityLabel>
                                             <div style={{ "text-align": "end" }}>{formatLargeNumber(item.total)}</div>
                                         </>
                                     )}
                                 </For>
                                 <div />
-                                <div style={{ "text-align": "end", "opacity": "0.5" }}>{"──"}</div>
+                                <div style={{ "text-align": "end", "opacity": "0.5" }}>{"───"}</div>
                                 <div>{"total"}</div>
                                 <div style={{ "text-align": "end" }}>{formatLargeNumber(value.total)}</div>
                             </div>
@@ -130,8 +139,12 @@ export const App = () => {
                     style={{ "grid-template-columns": `repeat(${Object.keys(getData().resourceUse).length}, 1fr)` }}
                 >
                     <For each={Object.keys(getData().resourceUse)}>{(key) => <div>{key.toLocaleUpperCase()}</div>}</For>
-                    <For each={Object.values(getData().resourceUse)}>
-                        {(value) => <div>{formatLargeNumber(value)}</div>}
+                    <For each={Object.entries(getData().resourceUse)}>
+                        {([key, value]) => (
+                            <RarityLabel rarity={() => RESOURCE_DEFS[key as ResourceType].rarity}>
+                                {formatLargeNumber(value)}
+                            </RarityLabel>
+                        )}
                     </For>
                 </div>
             </Surface>
