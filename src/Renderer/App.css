@@ -6,3 +6,8 @@
     gap: 20px;
     padding: 20px;
 }
+
+.app .grid {
+    display: grid;
+    gap: 20px;
+}

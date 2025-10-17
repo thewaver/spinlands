@@ -59,7 +59,7 @@ export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
     mechanical: {
         rarity: "epic",
         uses: ["assembly"],
-        value: 800,
+        value: 1000,
     },
     electronic: {
         rarity: "epic",
