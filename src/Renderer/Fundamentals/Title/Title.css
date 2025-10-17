@@ -1,0 +1,16 @@
+.title {
+    white-space: pre;
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+    text-shadow:
+        0 0 1px black,
+        0 0 2px black,
+        0 0 4px black,
+        0 0 8px black;
+}
+
+.title.sub {
+    font-size: 20px;
+    line-height: 24px;
+}

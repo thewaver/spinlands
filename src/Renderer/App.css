@@ -1,0 +1,8 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+}
