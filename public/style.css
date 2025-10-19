@@ -78,6 +78,7 @@ label {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    max-width: max-content;
 }
 
 input:not([type="range"]),
@@ -110,8 +111,8 @@ textarea:hover:not(:disabled) {
 button {
     padding-inline: 20px;
     background-color: rgb(from var(--clr-primary-text) r g b / 0.5);
-    border: 2px solid transparent;
     border-radius: 10px;
+    border: none;
 }
 
 button:hover:not(:disabled) {

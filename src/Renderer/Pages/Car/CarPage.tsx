@@ -1,9 +1,13 @@
 import { For, createMemo } from "solid-js";
 
-import { CAR_COMPONENT_TYPES, CarComponentType } from "../../../Logic/Abstracts/Car/Component/CarComponent.types";
+import { CAR_COMPONENT_TYPES } from "../../../Logic/Abstracts/Car/Component/CarComponent.types";
 import { CarComponentUtils } from "../../../Logic/Abstracts/Car/Component/CarComponent.utils";
+import { RESOURCE_DEFS } from "../../../Logic/Abstracts/Resource/Resource.const";
+import { RESOURCE_RARITIES, ResourceType } from "../../../Logic/Abstracts/Resource/Resource.types";
+import { getWeightedRandom } from "../../../Logic/Utils/number";
 import { useAppStore } from "../../App.store";
 import { CarComponentInfo } from "../../Components/Car/Component/Info/CarComponentInfo";
+import { Lootbox } from "../../Components/Lootbox/Lootbox";
 import { AmountLabel } from "../../Fundamentals/AmountLabel/AmountLabel";
 import { Surface } from "../../Fundamentals/Surface/Surface";
 import { Title } from "../../Fundamentals/Title/Title";
@@ -25,7 +29,37 @@ export const CarPage = (props: CarPageProps) => {
     });
 
     return (
-        <div class={styles.root}>
+        <>
+            <Title>{"Lootboxes"}</Title>
+            <Surface>
+                <div
+                    class={styles.grid}
+                    style={{
+                        "grid-template-columns": `repeat(${RESOURCE_RARITIES.length}, 1fr)`,
+                        "justify-items": "center",
+                    }}
+                >
+                    <For each={RESOURCE_RARITIES}>
+                        {(rarity) => (
+                            <Lootbox
+                                rarity={() => rarity}
+                                onClick={() => {
+                                    const candidates = Object.fromEntries(
+                                        Object.entries(RESOURCE_DEFS)
+                                            .filter(([, value]) => value.rarity === rarity)
+                                            .map(([key, value]) => [key, value.probability]),
+                                    );
+
+                                    const items = Array.from({ length: 5 }, () => getWeightedRandom(candidates));
+
+                                    alert(items.join(" + "));
+                                }}
+                            />
+                        )}
+                    </For>
+                </div>
+            </Surface>
+
             <Title>{"Attribute Values"}</Title>
             <Surface>
                 <div
@@ -50,10 +84,8 @@ export const CarPage = (props: CarPageProps) => {
                     "grid-template-columns": `repeat(${CAR_COMPONENT_TYPES.length}, 1fr)`,
                 }}
             >
-                <For each={CAR_COMPONENT_TYPES}>
-                    {(key) => <CarComponentInfo type={() => key as CarComponentType} />}
-                </For>
+                <For each={CAR_COMPONENT_TYPES}>{(key) => <CarComponentInfo type={() => key} />}</For>
             </div>
-        </div>
+        </>
     );
 };

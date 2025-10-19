@@ -100,7 +100,7 @@ export const CarComponentInfo = (props: CarComponentInfoProps) => {
                     disabled={!getData().isUpgradeable}
                     onClick={() => actions.setCarComponentLevel(props.type(), getData().level + 1)}
                 >
-                    <span>{"upgrade ("}</span>
+                    <span>{"UPGRADE ("}</span>
                     <AmountLabel amount={() => getData().upgradeTime} format={() => "duration"} />
                     <span>{")"}</span>
                 </button>

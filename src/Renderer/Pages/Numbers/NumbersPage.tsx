@@ -35,7 +35,7 @@ export const NumbersPage = (props: NumbersPageProps) => {
     });
 
     return (
-        <div class={styles.root}>
+        <>
             <Title>{"Settings"}</Title>
             <Surface>
                 <label>
@@ -76,6 +76,7 @@ export const NumbersPage = (props: NumbersPageProps) => {
                     class={styles.grid}
                     style={{
                         "grid-template-columns": `repeat(${Object.keys(getData().componentCosts).length}, 1fr)`,
+                        "column-gap": "20px",
                     }}
                 >
                     <For each={Object.keys(getData().componentCosts)}>
@@ -88,6 +89,7 @@ export const NumbersPage = (props: NumbersPageProps) => {
                                 style={{
                                     "grid-template-columns": "2fr 1fr",
                                     "align-self": "start",
+                                    "row-gap": 0,
                                 }}
                             >
                                 <For each={value.items}>
@@ -104,7 +106,7 @@ export const NumbersPage = (props: NumbersPageProps) => {
                                     )}
                                 </For>
                                 <div />
-                                <div style={{ "text-align": "end", "opacity": "0.5" }}>{"───"}</div>
+                                <div style={{ "text-align": "end", "opacity": "0.5" }}>{"──"}</div>
                                 <div>{"total"}</div>
                                 <div style={{ "text-align": "end" }}>
                                     <AmountLabel amount={() => value.total} format={() => "quantity"} />
@@ -144,6 +146,6 @@ export const NumbersPage = (props: NumbersPageProps) => {
                     </For>
                 </div>
             </Surface>
-        </div>
+        </>
     );
 };

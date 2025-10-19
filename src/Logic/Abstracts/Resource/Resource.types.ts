@@ -25,4 +25,6 @@ export type ResourceDefs = {
     rarity: ResourceRarity;
     uses: ResourceUse[];
     value: number;
+    probability: number;
 };
+
