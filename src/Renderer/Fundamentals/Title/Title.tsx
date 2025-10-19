@@ -1,13 +1,14 @@
 import { ParentProps } from "solid-js";
 
-import { TitleProps } from "./Title.types";
+import * as styles from "./Title.css";
 
-import "./Title.css";
+export type TitleProps = {};
 
 export const Title = (props: ParentProps<TitleProps>) => {
-    return <span class="title">{props.children}</span>;
+    return <span class={styles.title}>{props.children}</span>;
 };
 
 export const SubTitle = (props: ParentProps<TitleProps>) => {
-    return <span class="sub title">{props.children}</span>;
+    return <span class={styles.subTitle}>{props.children}</span>;
 };
+

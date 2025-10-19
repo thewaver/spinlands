@@ -37,7 +37,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
     engine: {
         getAttributeShift: (level: number) => ({
             acceleration: 4 * level,
-            power: 6 * level,
+            power: 5 * level,
             speed: 4 * level,
             cooling: -3 * level,
         }),
@@ -143,7 +143,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             acceleration: -1 * level,
             cooling: -1 * level,
             handling: -1 * level,
-            power: -2 * level,
+            power: -1 * level,
             speed: -1 * level,
         }),
         getUpgradeCost: (level: number) => ({

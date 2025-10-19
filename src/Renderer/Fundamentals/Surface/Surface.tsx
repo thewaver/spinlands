@@ -1,9 +1,16 @@
-import { ParentProps } from "solid-js";
+import { Accessor, ParentProps } from "solid-js";
 
-import { SurfaceProps } from "./Surface.types";
+import * as styles from "./Surface.css";
 
-import "./Surface.css";
+export type SurfaceProps = {
+    isUnpadded?: Accessor<boolean>;
+};
 
 export const Surface = (props: ParentProps<SurfaceProps>) => {
-    return <div class={`surface ${props.unpadded?.() ? "unpadded" : "padded"}`}>{props.children}</div>;
+    return (
+        <div class={`${styles.surface} ${styles.surfaceVariant[props.isUnpadded?.() ? "unpadded" : "padded"]}`}>
+            {props.children}
+        </div>
+    );
 };
+

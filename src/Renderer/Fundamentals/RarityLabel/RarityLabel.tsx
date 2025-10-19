@@ -1,9 +1,13 @@
-import { ParentProps } from "solid-js";
+import { Accessor, ParentProps } from "solid-js";
 
-import { RarityLabelProps } from "./RarityLabel.types";
+import { ResourceRarity } from "../../../Logic/Abstracts/Resource/Resource.types";
 
-import "./RarityLabel.css";
+import * as styles from "./RarityLabel.css";
+
+export type RarityLabelProps = {
+    rarity: Accessor<ResourceRarity>;
+};
 
 export const RarityLabel = (props: ParentProps<RarityLabelProps>) => {
-    return <span class={`rarityLabel ${props.rarity()}`}>{props.children}</span>;
+    return <span class={`rarityLabel ${styles.rarityVariant[props.rarity()]}`}>{props.children}</span>;
 };

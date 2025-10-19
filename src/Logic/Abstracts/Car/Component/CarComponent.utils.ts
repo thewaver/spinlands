@@ -5,7 +5,7 @@ import { CAR_COMPONENT_DEFS } from "./CarComponent.const";
 import { CAR_COMPONENT_TYPES, CarComponentType } from "./CarComponent.types";
 
 export namespace CarComponentUtils {
-    export const getUpgradeResourceUse = (levels: Record<CarComponentType, number>) => {
+    export const getTotalUpgradeResourceUsed = (levels: Record<CarComponentType, number>) => {
         const result = Object.fromEntries(
             RESOURCE_TYPES.filter((key) => RESOURCE_DEFS[key].uses.includes("assembly")).map((key) => [key, 0]),
         );
@@ -21,7 +21,7 @@ export namespace CarComponentUtils {
         return result;
     };
 
-    export const getComponentUpgradeCost = (levels: Record<CarComponentType, number>) => {
+    export const getComponenstUpgradeCost = (levels: Record<CarComponentType, number>) => {
         const result = Object.fromEntries(
             CAR_COMPONENT_TYPES.map((key) => [
                 key,
@@ -47,7 +47,7 @@ export namespace CarComponentUtils {
         return result;
     };
 
-    export const getComponentUpgradeTime = (levels: Record<CarComponentType, number>) => {
+    export const getComponentsUpgradeTime = (levels: Record<CarComponentType, number>) => {
         const result = Object.fromEntries(CAR_COMPONENT_TYPES.map((key) => [key, 0]));
 
         Object.entries(CAR_COMPONENT_DEFS).forEach(([key, value]) => {
@@ -57,7 +57,7 @@ export namespace CarComponentUtils {
         return result;
     };
 
-    export const getAttributeValues = (levels: Record<CarComponentType, number>) => {
+    export const getAttributesValues = (levels: Record<CarComponentType, number>) => {
         const result = Object.fromEntries(CAR_ATTRIBUTE_TYPES.map((key) => [key, 0]));
 
         Object.entries(CAR_COMPONENT_DEFS).forEach(([key, value]) => {
@@ -70,7 +70,7 @@ export namespace CarComponentUtils {
     };
 
     export const isUpgradeable = (component: CarComponentType, levels: Record<CarComponentType, number>) => {
-        const newAttributes = getAttributeValues(
+        const newAttributes = getAttributesValues(
             Object.fromEntries(
                 Object.entries(levels).map(([key, value]) => [key, key === component ? value + 1 : value]),
             ) as Record<CarComponentType, number>,
