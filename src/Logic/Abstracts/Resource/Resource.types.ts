@@ -1,3 +1,5 @@
+import { RarityType } from "../Rarity/Rarity.types";
+
 export const RESOURCE_TYPES = [
     "credit",
     "gas",
@@ -12,19 +14,20 @@ export const RESOURCE_TYPES = [
     "electronic",
     "mechanical",
     "nitro",
+
+    "lootbox-common",
+    "lootbox-uncommon",
+    "lootbox-rare",
+    "lootbox-epic",
 ] as const;
 export type ResourceType = (typeof RESOURCE_TYPES)[number];
 
-export const RESOURCE_USES = ["assembly", "mission", "research", "trade"] as const;
+export const RESOURCE_USES = ["assembly", "claim", "mission", "research", "trade"] as const;
 export type ResourceUse = (typeof RESOURCE_USES)[number];
 
-export const RESOURCE_RARITIES = ["common", "uncommon", "rare", "epic"] as const;
-export type ResourceRarity = (typeof RESOURCE_RARITIES)[number];
-
 export type ResourceDefs = {
-    rarity: ResourceRarity;
+    rarity: RarityType;
     uses: ResourceUse[];
     value: number;
-    probability: number;
 };
 

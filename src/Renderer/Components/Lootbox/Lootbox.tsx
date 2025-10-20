@@ -1,12 +1,12 @@
 import { Accessor } from "solid-js";
 
-import { ResourceRarity } from "../../../Logic/Abstracts/Resource/Resource.types";
+import { RarityType } from "../../../Logic/Abstracts/Rarity/Rarity.types";
 import { useAppStore } from "../../App.store";
 
 import * as styles from "./Lootbox.css";
 
 export type LootboxProps = {
-    rarity: Accessor<ResourceRarity>;
+    rarity: Accessor<RarityType>;
     onClick: () => void;
 };
 

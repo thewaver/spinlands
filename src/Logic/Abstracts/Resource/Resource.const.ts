@@ -1,83 +1,91 @@
 import { ResourceDefs, ResourceType } from "./Resource.types";
 
 export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
-    credit: {
+    "credit": {
         rarity: "common",
         uses: ["trade"],
         value: 1,
-        probability: 64,
     },
-    gas: {
+    "gas": {
         rarity: "common",
         uses: ["mission"],
         value: 20,
-        probability: 16,
     },
-    rubber: {
+    "rubber": {
         rarity: "common",
         uses: ["assembly"],
         value: 10,
-        probability: 32,
     },
-    scrap: {
+    "scrap": {
         rarity: "common",
         uses: ["assembly"],
         value: 10,
-        probability: 48,
     },
-    wire: {
+    "wire": {
         rarity: "common",
         uses: ["assembly"],
         value: 10,
-        probability: 16,
     },
-    ammo: {
+    "ammo": {
         rarity: "uncommon",
         uses: ["mission"],
         value: 40,
-        probability: 8,
     },
-    epoxy: {
+    "epoxy": {
         rarity: "uncommon",
         uses: ["assembly"],
         value: 20,
-        probability: 16,
     },
-    lubricant: {
+    "lubricant": {
         rarity: "uncommon",
         uses: ["assembly"],
         value: 20,
-        probability: 16,
     },
-    alloy: {
+    "alloy": {
         rarity: "rare",
         uses: ["assembly"],
         value: 80,
-        probability: 8,
     },
-    schematic: {
+    "schematic": {
         rarity: "rare",
         uses: ["research"],
         value: 200,
-        probability: 8,
     },
-    nitro: {
+    "nitro": {
         rarity: "rare",
         uses: ["mission"],
         value: 200,
-        probability: 4,
     },
-    mechanical: {
+    "mechanical": {
         rarity: "epic",
         uses: ["assembly"],
         value: 1000,
-        probability: 2,
     },
-    electronic: {
+    "electronic": {
         rarity: "epic",
         uses: ["assembly"],
         value: 2000,
-        probability: 1,
+    },
+
+    "lootbox-common": {
+        rarity: "common",
+        uses: ["claim"],
+        value: 10,
+    },
+    "lootbox-uncommon": {
+        rarity: "uncommon",
+        uses: ["claim"],
+        value: 40,
+    },
+    "lootbox-rare": {
+        rarity: "rare",
+        uses: ["claim"],
+        value: 120,
+    },
+    "lootbox-epic": {
+        rarity: "epic",
+        uses: ["claim"],
+        value: 1200,
     },
 };
 

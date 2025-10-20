@@ -1,6 +1,6 @@
-import { ResourceRarity } from "../../../Logic/Abstracts/Resource/Resource.types";
+import { RarityType } from "../../../Logic/Abstracts/Rarity/Rarity.types";
 
-export const RARITY_COLORS: Record<ResourceRarity, string> = {
+export const RARITY_COLORS: Record<RarityType, string> = {
     common: "rgb(255, 255, 255)",
     uncommon: "rgb(128, 255, 0)",
     rare: "rgb(0, 192, 255)",

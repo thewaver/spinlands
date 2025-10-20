@@ -1,3 +1,4 @@
+import { RARITY_WEIGHTS } from "../../Rarity/Rarity.const";
 import { RESOURCE_DEFS } from "../../Resource/Resource.const";
 import { RESOURCE_TYPES, ResourceType } from "../../Resource/Resource.types";
 import { CAR_ATTRIBUTE_TYPES } from "../Attribute/CarAttribute.types";
@@ -5,9 +6,11 @@ import { CAR_COMPONENT_DEFS } from "./CarComponent.const";
 import { CAR_COMPONENT_TYPES, CarComponentType } from "./CarComponent.types";
 
 export namespace CarComponentUtils {
-    export const getTotalUpgradeResourceUsed = (levels: Record<CarComponentType, number>) => {
+    export const getTotalUpgradeResourcesUsed = (levels: Record<CarComponentType, number>) => {
         const result = Object.fromEntries(
-            RESOURCE_TYPES.filter((key) => RESOURCE_DEFS[key].uses.includes("assembly")).map((key) => [key, 0]),
+            RESOURCE_TYPES.filter((key) => RESOURCE_DEFS[key].uses.includes("assembly"))
+                .sort((a, b) => RARITY_WEIGHTS[RESOURCE_DEFS[a].rarity] - RARITY_WEIGHTS[RESOURCE_DEFS[b].rarity])
+                .map((key) => [key, 0]),
         );
 
         Object.entries(CAR_COMPONENT_DEFS).forEach(([key, value]) => {

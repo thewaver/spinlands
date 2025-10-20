@@ -23,7 +23,7 @@ export const NumbersPage = (props: NumbersPageProps) => {
         >;
         const componentCosts = CarComponentUtils.getComponenstUpgradeCost(levels);
         const timeCosts = CarComponentUtils.getComponentsUpgradeTime(levels);
-        const resourceUse = CarComponentUtils.getTotalUpgradeResourceUsed(levels);
+        const resourceUse = CarComponentUtils.getTotalUpgradeResourcesUsed(levels);
         const attributeValues = CarComponentUtils.getAttributesValues(levels);
 
         return {
