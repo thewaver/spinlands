@@ -26,7 +26,7 @@ export const CarComponentInfo = (props: CarComponentInfoProps) => {
         const upgradeTime = CAR_COMPONENT_DEFS[type].getUpgradeCost(level).timeSeconds;
         const currentAttributeShift = CAR_COMPONENT_DEFS[type].getAttributeShift(level);
         const nextAttributeShift = CAR_COMPONENT_DEFS[type].getAttributeShift(level + 1);
-        const isUpgradeable = CarComponentUtils.isUpgradeable(type, state.carComponentLevels);
+        const isUpgradeable = CarComponentUtils.isUpgradeable(type, state.carComponentLevels, state.resources);
 
         return {
             level,
@@ -98,7 +98,15 @@ export const CarComponentInfo = (props: CarComponentInfoProps) => {
 
                 <button
                     disabled={!getData().isUpgradeable}
-                    onClick={() => actions.setCarComponentLevel(props.type(), getData().level + 1)}
+                    onClick={() => {
+                        Object.entries(
+                            CAR_COMPONENT_DEFS[props.type()].getUpgradeCost(getData().level).resources,
+                        ).forEach(([key, value]) => {
+                            actions.addResource(key as ResourceType, value * -1);
+                        });
+
+                        actions.setCarComponentLevel(props.type(), getData().level + 1);
+                    }}
                 >
                     <span>{"UPGRADE ("}</span>
                     <AmountLabel amount={() => getData().upgradeTime} format={() => "duration"} />

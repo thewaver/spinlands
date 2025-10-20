@@ -3,7 +3,7 @@ import { ResourceDefs, ResourceType } from "./Resource.types";
 export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
     "credit": {
         rarity: "common",
-        uses: ["trade"],
+        uses: ["other"],
         value: 1,
     },
     "gas": {
@@ -48,7 +48,7 @@ export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
     },
     "schematic": {
         rarity: "rare",
-        uses: ["research"],
+        uses: ["other"],
         value: 200,
     },
     "nitro": {
@@ -65,6 +65,11 @@ export const RESOURCE_DEFS: Record<ResourceType, ResourceDefs> = {
         rarity: "epic",
         uses: ["assembly"],
         value: 2000,
+    },
+    "powercell": {
+        rarity: "epic",
+        uses: ["mission"],
+        value: 400,
     },
 
     "lootbox-common": {

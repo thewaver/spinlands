@@ -11,9 +11,7 @@ import { Title } from "../../Fundamentals/Title/Title";
 
 import * as styles from "./NumbersPage.css";
 
-export type NumbersPageProps = {};
-
-export const NumbersPage = (props: NumbersPageProps) => {
+export const NumbersPage = () => {
     const [getLevel, setLevel] = createSignal(1);
 
     const getData = createMemo(() => {

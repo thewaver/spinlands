@@ -14,6 +14,7 @@ export const RESOURCE_TYPES = [
     "electronic",
     "mechanical",
     "nitro",
+    "powercell",
 
     "lootbox-common",
     "lootbox-uncommon",
@@ -22,7 +23,7 @@ export const RESOURCE_TYPES = [
 ] as const;
 export type ResourceType = (typeof RESOURCE_TYPES)[number];
 
-export const RESOURCE_USES = ["assembly", "claim", "mission", "research", "trade"] as const;
+export const RESOURCE_USES = ["assembly", "claim", "mission", "other"] as const;
 export type ResourceUse = (typeof RESOURCE_USES)[number];
 
 export type ResourceDefs = {

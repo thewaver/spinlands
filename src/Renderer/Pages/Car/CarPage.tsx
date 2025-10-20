@@ -1,8 +1,7 @@
-import { For, createMemo } from "solid-js";
+import { For, Show, createMemo } from "solid-js";
 
 import { CAR_COMPONENT_TYPES } from "../../../Logic/Abstracts/Car/Component/CarComponent.types";
 import { CarComponentUtils } from "../../../Logic/Abstracts/Car/Component/CarComponent.utils";
-import { LootboxUtils } from "../../../Logic/Abstracts/Lootbox/Lootbox.utls";
 import { RARITY_TYPES } from "../../../Logic/Abstracts/Rarity/Rarity.types";
 import { RESOURCE_DEFS } from "../../../Logic/Abstracts/Resource/Resource.const";
 import { RESOURCE_USES, ResourceType, ResourceUse } from "../../../Logic/Abstracts/Resource/Resource.types";
@@ -12,16 +11,12 @@ import { Lootbox } from "../../Components/Lootbox/Lootbox";
 import { AmountLabel } from "../../Fundamentals/AmountLabel/AmountLabel";
 import { RarityLabel } from "../../Fundamentals/RarityLabel/RarityLabel";
 import { Surface } from "../../Fundamentals/Surface/Surface";
-import { SubTitle, Title } from "../../Fundamentals/Title/Title";
+import { Title } from "../../Fundamentals/Title/Title";
 
 import * as styles from "./CarPage.css";
 
-export type CarPageProps = {};
-
-export const CarPage = (props: CarPageProps) => {
-    const [state, actions] = useAppStore();
-
-    console.log(state.resources);
+export const CarPage = () => {
+    const [state] = useAppStore();
 
     const getData = createMemo(() => {
         const levels = state.carComponentLevels;
@@ -47,17 +42,12 @@ export const CarPage = (props: CarPageProps) => {
                         {(rarity) => (
                             <Lootbox
                                 rarity={() => rarity}
-                                onClick={() => {
-                                    const picked = LootboxUtils.open(5, rarity);
-                                    const pickedDesc = Object.entries(picked)
+                                onClick={(items) => {
+                                    const pickedDesc = Object.entries(items)
                                         .map(([key, value]) => `${key} * ${value}`)
                                         .join(" + ");
 
-                                    alert(pickedDesc);
-
-                                    Object.entries(picked).forEach(([key, value]) => {
-                                        actions.addResource(key as ResourceType, value);
-                                    });
+                                    console.log(pickedDesc);
                                 }}
                             />
                         )}
@@ -66,38 +56,49 @@ export const CarPage = (props: CarPageProps) => {
             </Surface>
 
             <Title>{"Resource Counts"}</Title>
-            <For each={RESOURCE_USES}>
-                {(use) => {
-                    const getResources = createMemo(() =>
-                        Object.entries(state.resources).filter(([key]) =>
-                            RESOURCE_DEFS[key as ResourceType].uses.includes(use as ResourceUse),
-                        ),
-                    );
-
-                    return (
-                        <>
-                            <SubTitle>{use.toLocaleUpperCase()}</SubTitle>
-                            <Surface>
-                                <div
-                                    class={styles.grid}
-                                    style={{
-                                        "grid-template-columns": `repeat(${getResources().length}, 1fr)`,
-                                    }}
-                                >
-                                    <For each={getResources()}>{([key]) => <div>{key.toLocaleUpperCase()}</div>}</For>
-                                    <For each={getResources()}>
-                                        {([key, value]) => (
-                                            <RarityLabel rarity={() => RESOURCE_DEFS[key as ResourceType].rarity}>
-                                                <AmountLabel amount={() => value} format={() => "quantity"} />
-                                            </RarityLabel>
-                                        )}
-                                    </For>
-                                </div>
-                            </Surface>
-                        </>
-                    );
+            <div
+                class={styles.grid}
+                style={{
+                    "grid-template-columns": "auto 1fr",
+                    "align-items": "center",
+                    "column-gap": "40px",
                 }}
-            </For>
+            >
+                <For each={RESOURCE_USES}>
+                    {(use) => {
+                        const getResources = createMemo(() =>
+                            Object.entries(state.resources).filter(([key]) =>
+                                RESOURCE_DEFS[key as ResourceType].uses.includes(use as ResourceUse),
+                            ),
+                        );
+
+                        return (
+                            <Show when={use !== "claim"}>
+                                <div>{use.toLocaleUpperCase()}</div>
+                                <Surface>
+                                    <div
+                                        class={styles.grid}
+                                        style={{
+                                            "grid-template-columns": `repeat(${getResources().length}, 1fr)`,
+                                        }}
+                                    >
+                                        <For each={getResources()}>
+                                            {([key]) => <div>{key.toLocaleUpperCase()}</div>}
+                                        </For>
+                                        <For each={getResources()}>
+                                            {([key, value]) => (
+                                                <RarityLabel rarity={() => RESOURCE_DEFS[key as ResourceType].rarity}>
+                                                    <AmountLabel amount={() => value} format={() => "quantity"} />
+                                                </RarityLabel>
+                                            )}
+                                        </For>
+                                    </div>
+                                </Surface>
+                            </Show>
+                        );
+                    }}
+                </For>
+            </div>
 
             <Title>{"Attribute Values"}</Title>
             <Surface>

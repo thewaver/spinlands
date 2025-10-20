@@ -72,7 +72,18 @@ export namespace CarComponentUtils {
         return result;
     };
 
-    export const isUpgradeable = (component: CarComponentType, levels: Record<CarComponentType, number>) => {
+    export const isUpgradeable = (
+        component: CarComponentType,
+        levels: Record<CarComponentType, number>,
+        resources: Record<ResourceType, number>,
+    ) => {
+        if (
+            Object.entries(CAR_COMPONENT_DEFS[component].getUpgradeCost(levels[component]).resources).some(
+                ([key, value]) => resources[key as ResourceType] < value,
+            )
+        )
+            return false;
+
         const newAttributes = getAttributesValues(
             Object.fromEntries(
                 Object.entries(levels).map(([key, value]) => [key, key === component ? value + 1 : value]),
