@@ -14,3 +14,13 @@ export const getWeightedRandom = <T extends string>(weights: Record<T, number>):
 
     return sorted[sorted.length - 1][0];
 };
+
+export const randomTimes = (count: number, range: number) => {
+    let result = 0;
+
+    for (let i = 0; i < count; i++) {
+        result += Math.floor(Math.random() * range);
+    }
+
+    return result;
+};
