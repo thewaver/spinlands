@@ -3,7 +3,7 @@ import { MissionDefs } from "./Mission.types";
 export const MISSION_DEFS = {
     convoy_attack: {
         name: "Convoy Attack",
-        desc: "Turtle Tom is moving a large portion of his assets across the open Wasteland. Lots of credits to be made for those foolish enough to approach the convoy.\n\nYou better load up on ammo and put on a thick layer of armor for this one.\n\nOh, and in case it wasn't obvious - you're not the only dog chasing after this bone, and it's first come, first served.",
+        desc: "Turtle Tom is moving a large portion of his assets across the open Wasteland. Lots of credits to be made for those foolish enough to approach the convoy.\n\nYou better load up on ammo and put on a thick layer of armor for this one.",
         modifiers: {
             attack: 4,
             defense: 2,
@@ -59,7 +59,7 @@ export const MISSION_DEFS = {
 
     deathmatch: {
         name: "Deathmatch",
-        desc: "Scrap or be scrapped to the roar of the arena's crowd.",
+        desc: "Scrap or be scrapped to the roar of the arena's crowd.\n\nSecond place is last place, so make sure you have what it takes before diving in.",
         modifiers: {
             attack: 4,
             defense: 4,
@@ -84,7 +84,7 @@ export const MISSION_DEFS = {
 
     drift: {
         name: "Drift",
-        desc: "Not everyone is the Wasteland is refined enough to enjoy carnage. Some people just like scarring the asphalt with doughnuts.",
+        desc: "Not everyone is the Wasteland is refined enough to enjoy carnage. Some people just like painting the asphalt with doughnuts.\n\nPut on a good show, pocket some credits. EZ.",
         modifiers: {
             grip: 4,
             handling: 4,
@@ -186,8 +186,8 @@ export const MISSION_DEFS = {
         desc: "Things have been quiet lately. Time to go out there and see what may be stirring under the Wasteland's twisted veil.\n\nBe careful though, the area may not be entirely friendly.",
         modifiers: {
             defense: 2,
-            grip: 4,
-            handling: 4,
+            grip: 2,
+            handling: 2,
         },
         requirements: {
             gas: 2,
@@ -206,3 +206,4 @@ export const MISSION_DEFS = {
         timeSeconds: 60 * 60,
     },
 } as const satisfies Record<string, MissionDefs>;
+

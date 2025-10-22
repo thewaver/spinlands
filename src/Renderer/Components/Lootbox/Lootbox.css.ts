@@ -43,7 +43,7 @@ export const title = style({
     lineHeight: "24px",
 });
 
-export const desc = style({
+export const tabulation = style({
     display: "grid",
     gridTemplateColumns: "1fr repeat(2, auto)",
     justifyContent: "start",
@@ -51,3 +51,4 @@ export const desc = style({
     columnGap: 10,
     textAlign: "start",
 });
+

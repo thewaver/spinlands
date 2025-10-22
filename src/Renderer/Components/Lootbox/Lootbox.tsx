@@ -35,7 +35,7 @@ export const Lootbox = (props: LootboxProps) => {
                 <div class={styles.title}>{props.rarity().toLocaleUpperCase()}</div>
                 <div>{`get ${LOOTBOX_DEFS[props.rarity()].openCount} items`}</div>
             </div>
-            <div class={styles.desc}>
+            <div class={styles.tabulation}>
                 <For each={Object.entries(LOOTBOX_DEFS[props.rarity()].items)}>
                     {([key, value]) => (
                         <>
@@ -49,3 +49,4 @@ export const Lootbox = (props: LootboxProps) => {
         </button>
     );
 };
+

@@ -1,4 +1,4 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 export const surface = style({
     width: "100%",
@@ -7,14 +7,6 @@ export const surface = style({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     boxShadow: "var(--shd-tiny), var(--shd-soft)",
     overflow: "hidden",
-});
-
-export const surfaceVariant = styleVariants({
-    padded: {
-        padding: 20,
-    },
-    unpadded: {
-        padding: 0,
-    },
+    padding: 20,
 });
 

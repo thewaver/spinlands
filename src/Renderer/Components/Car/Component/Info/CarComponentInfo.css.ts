@@ -10,7 +10,7 @@ export const root = style({
 
 export const tabulation = style({
     display: "grid",
-    gridTemplateColumns: "auto auto",
+    gridTemplateColumns: "1fr auto",
     columnGap: 10,
 });
 
@@ -22,3 +22,4 @@ export const divider = style({
     paddingBottom: 3,
     borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
 });
+
