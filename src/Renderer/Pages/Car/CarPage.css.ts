@@ -5,17 +5,3 @@ export const grid = style({
     gap: 10,
 });
 
-export const flex = style({
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "stretch",
-    gap: 10,
-});
-
-export const missionWrapper = style({
-    flex: "0 0 240px",
-    width: 240,
-});
-

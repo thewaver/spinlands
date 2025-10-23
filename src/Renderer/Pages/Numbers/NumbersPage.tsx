@@ -2,6 +2,7 @@ import { For, createMemo, createSignal } from "solid-js";
 
 import { CAR_COMPONENT_TYPES, CarComponentType } from "../../../Logic/Abstracts/Car/Component/CarComponent.types";
 import { CarComponentUtils } from "../../../Logic/Abstracts/Car/Component/CarComponent.utils";
+import { MissionUtils } from "../../../Logic/Abstracts/Mission/Mission.utils";
 import { RESOURCE_DEFS } from "../../../Logic/Abstracts/Resource/Resource.const";
 import { ResourceType } from "../../../Logic/Abstracts/Resource/Resource.types";
 import { AmountLabel } from "../../Fundamentals/AmountLabel/AmountLabel";
@@ -22,13 +23,17 @@ export const NumbersPage = () => {
         const componentCosts = CarComponentUtils.getComponenstUpgradeCost(levels);
         const timeCosts = CarComponentUtils.getComponentsUpgradeTime(levels);
         const resourceUse = CarComponentUtils.getTotalUpgradeResourcesUsed(levels);
-        const attributeValues = CarComponentUtils.getAttributesValues(levels);
+        const carAttributeValues = CarComponentUtils.getAttributesValues(levels);
+        const missionAttributeValues = MissionUtils.getCarAttributeUse();
+
+        console.log(missionAttributeValues);
 
         return {
             componentCosts,
             timeCosts,
             resourceUse,
-            attributeValues,
+            carAttributeValues,
+            missionAttributeValues,
         };
     });
 
@@ -51,24 +56,41 @@ export const NumbersPage = () => {
                 </label>
             </Surface>
 
-            <Title>{"Attribute Values"}</Title>
+            <Title>{"Mission Car Attribute Use"}</Title>
             <Surface>
                 <div
                     class={styles.grid}
                     style={{
-                        "grid-template-columns": `repeat(${Object.keys(getData().attributeValues).length}, 1fr)`,
+                        "grid-template-columns": `repeat(${Object.keys(getData().missionAttributeValues).length}, 1fr)`,
                     }}
                 >
-                    <For each={Object.keys(getData().attributeValues)}>
+                    <For each={Object.keys(getData().missionAttributeValues)}>
                         {(key) => <div>{key.toLocaleUpperCase()}</div>}
                     </For>
-                    <For each={Object.values(getData().attributeValues)}>
+                    <For each={Object.values(getData().missionAttributeValues)}>
                         {(value) => <AmountLabel amount={() => value} format={() => "quantity"} />}
                     </For>
                 </div>
             </Surface>
 
-            <Title>{"Component Costs"}</Title>
+            <Title>{"Car Attribute Values"}</Title>
+            <Surface>
+                <div
+                    class={styles.grid}
+                    style={{
+                        "grid-template-columns": `repeat(${Object.keys(getData().carAttributeValues).length}, 1fr)`,
+                    }}
+                >
+                    <For each={Object.keys(getData().carAttributeValues)}>
+                        {(key) => <div>{key.toLocaleUpperCase()}</div>}
+                    </For>
+                    <For each={Object.values(getData().carAttributeValues)}>
+                        {(value) => <AmountLabel amount={() => value} format={() => "quantity"} />}
+                    </For>
+                </div>
+            </Surface>
+
+            <Title>{"Car Component Upgrade Costs"}</Title>
             <Surface>
                 <div
                     class={styles.grid}
@@ -115,7 +137,7 @@ export const NumbersPage = () => {
                 </div>
             </Surface>
 
-            <Title>{"Upgrade Time"}</Title>
+            <Title>{"Car Component Upgrade Time"}</Title>
             <Surface>
                 <div
                     class={styles.grid}
@@ -128,7 +150,7 @@ export const NumbersPage = () => {
                 </div>
             </Surface>
 
-            <Title>{"Resource Use"}</Title>
+            <Title>{"Total Car Component Resource Use"}</Title>
             <Surface>
                 <div
                     class={styles.grid}
@@ -147,3 +169,4 @@ export const NumbersPage = () => {
         </>
     );
 };
+

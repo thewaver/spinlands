@@ -25,8 +25,8 @@ export const attributeVariants = styleVariants({
     empty: {
         width: 16,
         height: 16,
-        border: `2px solid ${AMOUNT_COLORS.negative}`,
-        backgroundColor: `hsl(from ${AMOUNT_COLORS.negative} h s l / 0.5)`,
+        border: `2px solid ${AMOUNT_COLORS.neutral}`,
+        backgroundColor: `hsl(from ${AMOUNT_COLORS.neutral} h s l / 0.5)`,
     },
 });
 

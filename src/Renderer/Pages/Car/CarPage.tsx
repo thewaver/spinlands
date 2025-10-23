@@ -33,11 +33,21 @@ export const CarPage = () => {
     return (
         <>
             <Title>{"Missions"}</Title>
-            <div class={styles.flex}>
+            <div
+                class={styles.grid}
+                style={{
+                    "grid-template-columns": `repeat(6, 1fr)`,
+                }}
+            >
                 <For each={Object.values(MISSION_DEFS)}>
                     {(mission) => (
-                        <Surface className={() => styles.missionWrapper}>
-                            <Mission defs={() => mission as MissionDefs} />
+                        <Surface>
+                            <Mission
+                                defs={() => mission as MissionDefs}
+                                onClick={(score) => {
+                                    console.log("Mission score", score);
+                                }}
+                            />
                         </Surface>
                     )}
                 </For>

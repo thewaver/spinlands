@@ -14,6 +14,7 @@ import * as styles from "./CarComponentInfo.css";
 
 export type CarComponentInfoProps = {
     type: Accessor<CarComponentType>;
+    onClick?: () => void;
 };
 
 export const CarComponentInfo = (props: CarComponentInfoProps) => {
@@ -106,6 +107,8 @@ export const CarComponentInfo = (props: CarComponentInfoProps) => {
                         });
 
                         actions.setCarComponentLevel(props.type(), getData().level + 1);
+
+                        props.onClick?.();
                     }}
                 >
                     <span>{"UPGRADE ("}</span>
@@ -116,3 +119,4 @@ export const CarComponentInfo = (props: CarComponentInfoProps) => {
         </Surface>
     );
 };
+

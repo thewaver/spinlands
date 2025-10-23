@@ -1,8 +1,11 @@
-import { Accessor, For, Show } from "solid-js";
+import { Accessor, For, Show, createMemo } from "solid-js";
 
+import { CarComponentUtils } from "../../../Logic/Abstracts/Car/Component/CarComponent.utils";
 import { MissionDefs } from "../../../Logic/Abstracts/Mission/Mission.types";
+import { MissionUtils } from "../../../Logic/Abstracts/Mission/Mission.utils";
 import { RESOURCE_DEFS } from "../../../Logic/Abstracts/Resource/Resource.const";
 import { ResourceType } from "../../../Logic/Abstracts/Resource/Resource.types";
+import { useAppStore } from "../../App.store";
 import { AmountLabel } from "../../Fundamentals/AmountLabel/AmountLabel";
 import { RarityLabel } from "../../Fundamentals/RarityLabel/RarityLabel";
 
@@ -10,19 +13,26 @@ import * as styles from "./Mission.css";
 
 export type MissionProps = {
     defs: Accessor<MissionDefs>;
+    onClick?: (score: number) => void;
 };
 
 export const Mission = (props: MissionProps) => {
+    const [state] = useAppStore();
+
+    const getData = createMemo(() => {
+        const carAttributeValues = CarComponentUtils.getAttributesValues(state.carComponentLevels);
+
+        return {
+            carAttributeValues,
+        };
+    });
+
     return (
         <div class={styles.root}>
             <div>{props.defs().name.toLocaleUpperCase()}</div>
             <div class={styles.pre}>{props.defs().desc}</div>
-            <div>
-                {"⏲ "}
-                <AmountLabel amount={() => props.defs().timeSeconds} format={() => "duration"} />
-            </div>
 
-            <div class={styles.divider}>{"Requires:"}</div>
+            <div class={styles.divider}>{"REQUIRES"}</div>
             <div class={styles.tabulation}>
                 <For each={Object.entries(props.defs().requirements)}>
                     {([key, value]) => (
@@ -36,7 +46,7 @@ export const Mission = (props: MissionProps) => {
                 </For>
             </div>
 
-            <div class={styles.divider}>{"Rewards:"}</div>
+            <div class={styles.divider}>{"REWARDS"}</div>
             <div class={styles.tabulation} style={{ "grid-template-columns": "auto 1fr auto" }}>
                 <For each={Object.entries(props.defs().rewards)}>
                     {([position, positionRewards]) => (
@@ -59,7 +69,7 @@ export const Mission = (props: MissionProps) => {
                 </For>
             </div>
 
-            <div class={styles.divider}>{"Modifiers:"}</div>
+            <div class={styles.divider}>{"MODIFIERS"}</div>
             <div class={styles.tabulation}>
                 <For each={Object.entries(props.defs().modifiers)}>
                     {([key, value]) => (
@@ -76,6 +86,18 @@ export const Mission = (props: MissionProps) => {
                     )}
                 </For>
             </div>
+
+            <button
+                onClick={() => {
+                    const score = MissionUtils.getMissionScore(props.defs().modifiers, getData().carAttributeValues);
+
+                    props.onClick?.(score);
+                }}
+            >
+                <span>{"BEGIN ("}</span>
+                <AmountLabel amount={() => props.defs().timeSeconds} format={() => "duration"} />
+                <span>{")"}</span>
+            </button>
         </div>
     );
 };

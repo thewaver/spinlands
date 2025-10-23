@@ -10,4 +10,6 @@ export const RARITY_COLORS: Record<RarityType, string> = {
 export const AMOUNT_COLORS = {
     positive: "rgb(64, 255, 128)",
     negative: "rgb(255, 64, 128)",
+    neutral: "rgb(255, 255, 255)",
 };
+
