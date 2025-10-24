@@ -1,6 +1,6 @@
 import { CarComponentDefs, CarComponentType } from "./CarComponent.types";
 
-const expLevel = (level: number) => Math.pow(level, 1 + 0.05 * level);
+const expLevel = (level: number) => Math.pow(level, 1 + 0.025 * level);
 
 export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
     armor: {
@@ -11,7 +11,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             speed: -2 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 45 * expLevel(level),
+            timeSeconds: 60 * 45 * expLevel(level),
             resources: {
                 rubber: 4 * level,
                 scrap: 12 * level,
@@ -25,7 +25,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             handling: 3 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 30 * expLevel(level),
+            timeSeconds: 60 * 30 * expLevel(level),
             resources: {
                 rubber: 4 * level,
                 scrap: 4 * level,
@@ -42,7 +42,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             cooling: -3 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 60 * expLevel(level),
+            timeSeconds: 60 * 60 * expLevel(level),
             resources: {
                 rubber: 2 * level,
                 scrap: 4 * level,
@@ -66,7 +66,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             speed: -1 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 45 * expLevel(level),
+            timeSeconds: 60 * 45 * expLevel(level),
             resources: {
                 rubber: 2 * level,
                 scrap: 12 * level,
@@ -86,7 +86,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             handling: 4 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 45 * expLevel(level),
+            timeSeconds: 60 * 45 * expLevel(level),
             resources: {
                 rubber: 2 * level,
                 scrap: 4 * level,
@@ -107,7 +107,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             grip: 3 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 30 * expLevel(level),
+            timeSeconds: 60 * 30 * expLevel(level),
             resources: {
                 rubber: 16 * level,
                 scrap: 4 * level,
@@ -121,7 +121,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             power: -2 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 60 * expLevel(level),
+            timeSeconds: 60 * 60 * expLevel(level),
             resources: {
                 scrap: 4 * level,
                 wire: 4 * level,
@@ -147,7 +147,7 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
             speed: -1 * level,
         }),
         getUpgradeCost: (level: number) => ({
-            timeSeconds: 30 * expLevel(level),
+            timeSeconds: 60 * 30 * expLevel(level),
             resources: {
                 rubber: 2 * level,
                 scrap: 4 * level,
@@ -165,4 +165,3 @@ export const CAR_COMPONENT_DEFS: Record<CarComponentType, CarComponentDefs> = {
         }),
     },
 };
-

@@ -21,7 +21,7 @@ export namespace LootboxUtils {
                 const recursiveRarity = RESOURCE_DEFS[picked].rarity;
 
                 for (let j = 0; j < LOOTBOX_DEFS[recursiveRarity].openCount; j++) {
-                    const recursiveResult = open(recursiveRarity);
+                    const recursiveResult = open(recursiveRarity, true);
 
                     Object.entries(recursiveResult).forEach(([key, value]) => {
                         result[key as ResourceType] = (result[key as ResourceType] ?? 0) + value;
@@ -37,3 +37,4 @@ export namespace LootboxUtils {
         return Object.values(LOOTBOX_DEFS[rarity].items).reduce((res, cur) => res + cur.probability, 0);
     };
 }
+
